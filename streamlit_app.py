@@ -154,7 +154,7 @@ if not st.session_state.token:
     st.subheader("Step 1 — Connect your Strava")
     scope = "read,activity:read_all"
     # On Streamlit Cloud, your app URL is the redirect. If running locally, it is DEFAULT_REDIRECT.
-    redirect_uri = os.environ.get("STREAMLIT_SERVER_URL", DEFAULT_REDIRECT)
+    redirect_uri = st.secrets.get("APP_URL", DEFAULT_REDIRECT)
     auth_url = f"{STRAVA_AUTH}?{urlencode({'client_id':CLIENT_ID,'response_type':'code','redirect_uri':redirect_uri,'scope':scope,'approval_prompt':'auto'})}"
     st.link_button("Connect with Strava", auth_url, type="primary")
     st.caption("After authorizing, you will land back here automatically.")
